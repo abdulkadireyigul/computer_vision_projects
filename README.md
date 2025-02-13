@@ -2,12 +2,6 @@
 
 Welcome to my personal playground for experimenting with computer vision using Python and OpenCV. This repository contains various examples and practices that help me learn and explore different techniques in image and video processing.
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Examples](#examples)
-
 ## Installation
 
 To use the code, you need Python installed on your computer. Then, install the required libraries with:
