@@ -25,8 +25,8 @@ def get_limits(color):
 
 # =============== Main code ===============
 
-# cap = cv2.VideoCapture(0)
-cap = cv2.VideoCapture('video.mp4')
+cap = cv2.VideoCapture(0)
+# cap = cv2.VideoCapture('./data/video.mp4')
 
 # Define the color to detect
 yellow = [0, 255, 255] # BGR values

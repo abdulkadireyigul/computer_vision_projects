@@ -32,7 +32,7 @@ def detect_object(frame):
 
 # =================== Main Image ===================
 
-img = cv2.imread("./data/person.jpg")
+img = cv2.imread("./data/group.jpg")
 
 results = detect_object(img)
 

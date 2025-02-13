@@ -39,7 +39,7 @@ def detect_text(image):
 
 # ======================== Test ========================
 
-img = cv2.imread('./data/text3.jpg')
+img = cv2.imread('./data/text.jpg')
 
 if img is None:
     print("Can't open image file")

@@ -1,0 +1,5 @@
+opencv-python==4.11.0.86
+numpy==2.1.1
+pillow==11.1.0
+face_recognition
+pytesseract==0.3.13
