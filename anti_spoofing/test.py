@@ -14,9 +14,9 @@ import argparse
 import warnings
 import time
 
-from src.anti_spoof_predict import AntiSpoofPredict
-from src.generate_patches import CropImage
-from src.utility import parse_model_name
+from anti_spoofing.src.anti_spoof_predict import AntiSpoofPredict
+from anti_spoofing.src.generate_patches import CropImage
+from anti_spoofing.src.utility import parse_model_name
 warnings.filterwarnings('ignore')
 
 stack = traceback.extract_stack()
@@ -35,10 +35,11 @@ def check_image(image):
     else:
         return True
 
-def test(image_name, model_dir, device_id):
+def test(image, model_dir, device_id):
     model_test = AntiSpoofPredict(device_id)
     image_cropper = CropImage()
-    image = cv2.imread(SAMPLE_IMAGE_PATH + image_name)
+    # image = cv2.imread(SAMPLE_IMAGE_PATH + image_name)
+    # image = cv2.resize(image, (int(image.shape[0] * 3 / 4), image.shape[0]))
     result = check_image(image)
     if result is False:
         return
@@ -66,29 +67,32 @@ def test(image_name, model_dir, device_id):
     # draw result of prediction
     label = np.argmax(prediction)
     value = prediction[0][label]/2
-    if label == 1:
-        print("Image '{}' is Real Face. Score: {:.2f}.".format(image_name, value))
-        result_text = "RealFace Score: {:.2f}".format(value)
-        color = (255, 0, 0)
-    else:
-        print("Image '{}' is Fake Face. Score: {:.2f}.".format(image_name, value))
-        result_text = "FakeFace Score: {:.2f}".format(value)
-        color = (0, 0, 255)
-    print("Prediction cost {:.2f} s".format(test_speed))
-    cv2.rectangle(
-        image,
-        (image_bbox[0], image_bbox[1]),
-        (image_bbox[0] + image_bbox[2], image_bbox[1] + image_bbox[3]),
-        color, 2)
-    cv2.putText(
-        image,
-        result_text,
-        (image_bbox[0], image_bbox[1] - 5),
-        cv2.FONT_HERSHEY_COMPLEX, 0.5*image.shape[0]/1024, color)
+    # if label == 1:
+    #     print("Image '{}' is Real Face. Score: {:.2f}.".format(image_name, value))
+    #     result_text = "RealFace Score: {:.2f}".format(value)
+    #     color = (255, 0, 0)
+    # else:
+    #     print("Image '{}' is Fake Face. Score: {:.2f}.".format(image_name, value))
+    #     result_text = "FakeFace Score: {:.2f}".format(value)
+    #     color = (0, 0, 255)
+    # print("Prediction cost {:.2f} s".format(test_speed))
+    # cv2.rectangle(
+    #     image,
+    #     (image_bbox[0], image_bbox[1]),
+    #     (image_bbox[0] + image_bbox[2], image_bbox[1] + image_bbox[3]),
+    #     color, 2)
+    # cv2.putText(
+    #     image,
+    #     result_text,
+    #     (image_bbox[0], image_bbox[1] - 5),
+    #     cv2.FONT_HERSHEY_COMPLEX, 0.5*image.shape[0]/1024, color)
 
-    format_ = os.path.splitext(image_name)[-1]
-    result_image_name = image_name.replace(format_, "_result" + format_)
-    cv2.imwrite(SAMPLE_IMAGE_PATH + result_image_name, image)
+    # format_ = os.path.splitext(image_name)[-1]
+    # result_image_name = image_name.replace(format_, "_result" + format_)
+    # cv2.imwrite(SAMPLE_IMAGE_PATH + result_image_name, image)
+    
+    print("Prediction cost {:.2f} s".format(test_speed))
+    return label, value
 
 
 if __name__ == "__main__":
